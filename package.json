@@ -72,9 +72,11 @@
         "express": "^4.18.2",
         "express-session": "^1.17.3",
         "express-validator": "^6.14.2",
+        "helmet": "^6.1.5",
         "md5": "^2.2.1",
-        "nodemon": "^2.0.22",
-        "helmet": "^6.1.5"
+        "mongoose": "^6.7.1",
+        "mogoose": "^0.0.1-security",
+        "nodemon": "^2.0.22"
     },
     "author": "Abiola YAkubu",
     "license": "ISC",

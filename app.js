@@ -3,9 +3,15 @@
 const express = require('express');
 const http = require('http')
 const bodyParser = require('body-parser');
+const helmet = require("helmet");
+var cors = require('cors')
+const cookieParser = require("cookie-parser");
 
 /** get the base path, then add it as a global variable. */
 global.__basedir = require('path').resolve('./');
+
+/**  error handler */
+const errorHandler = require(__basedir + '/app/middleware/ErrorHandler')
 
 /** parse the dot env and get the port */
 require('dotenv').config()
@@ -22,16 +28,35 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 
+
+var whitelist = ALLOWED_ORIGIN
+var corsOptions = {
+    origin: whitelist,
+    credentials: true,
+};
+
+app.options(cors(corsOptions));
+app.use(cors(corsOptions));
+
+//sessions is here 
+app.use(helmet());
+
+
+app.use(cookieParser());
+
 app.get('/', (req, res) => {
     res.json({
         "name": "the backdrop task home page"
     })
 });
 
-app.post('/uuid', (req, res) => {
+app.post('/register', (req, res) => {
     req.session.clientID = req.body.uuid
     res.end()
 });
+
+/** Standard error handling */
+app.use(errorHandler)
 
 
 /** catch all routes that are not defined and send response */
