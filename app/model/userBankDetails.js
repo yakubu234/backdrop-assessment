@@ -7,7 +7,7 @@ const userBankDetails = new Schema({
         type: String,
         trim: true,
         required: true,
-        unique: [true, 'Blog title must be unique']
+        unique: [true, 'Account number title must be unique']
     },
     account_name: {
         type: String,
@@ -25,10 +25,8 @@ const userBankDetails = new Schema({
         required: true,
     },
     status: {
-        type: String,
-        trim: true,
-        enum: ['unverified', 'verified'],
-        default: 'unverified'
+        type: Boolean,
+        default: true
     },
 
 }, { timestamps: true });

@@ -22,10 +22,6 @@ const UserSchema = new Schema({
         match: /.+\@.+\..+/,
         unique: [true, 'Email must be unique']
     },
-    password: {
-        type: String,
-        required: true
-    },
     phone: {
         type: String,
         trim: true,
@@ -35,25 +31,13 @@ const UserSchema = new Schema({
         type: String,
         trim: true,
         required: true
+    },
+    is_verified: {
+        type: String,
+        trim: true,
+        enum: ['unverified', 'verified'],
+        default: 'unverified'
     }
 }, { timestamps: true });
-
-// encrypt password before saving document
-UserSchema.pre('save', function (next) {
-    let user = this
-
-    if (!user.isModified('password')) return next()
-
-    // hash the password 
-    bcrypt.hash(user.password, saltRounds, (err, hash) => {
-        if (err) return next(err)
-
-        //override the text password with the hashed one
-        user.password = hash
-        next()
-    })
-})
-
-
 
 module.exports = mongoose.model('user', UserSchema);
