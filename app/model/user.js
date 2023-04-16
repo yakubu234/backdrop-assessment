@@ -33,10 +33,8 @@ const UserSchema = new Schema({
         required: true
     },
     is_verified: {
-        type: String,
-        trim: true,
-        enum: ['unverified', 'verified'],
-        default: 'unverified'
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true });
 

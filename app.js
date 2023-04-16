@@ -12,6 +12,7 @@ global.__basedir = require('path').resolve('./');
 
 /**  error handler */
 const errorHandler = require(__basedir + '/app/middleware/ErrorHandler')
+const routes = require(__basedir + '/route/routes')
 
 /** parse the dot env and get the port */
 require('dotenv').config()
@@ -43,17 +44,8 @@ app.use(helmet());
 
 
 app.use(cookieParser());
-
-app.get('/', (req, res) => {
-    res.json({
-        "name": "the backdrop task home page"
-    })
-});
-
-app.post('/register', (req, res) => {
-    req.session.clientID = req.body.uuid
-    res.end()
-});
+// public route
+app.use('/api', routes);
 
 /** Standard error handling */
 app.use(errorHandler)

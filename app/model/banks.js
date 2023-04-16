@@ -4,7 +4,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const banks = new Schema({
 
-    name: {
+    bank_id: {
+        type: String,
+        trim: true,
+        required: true
+    }, name: {
         type: String,
         trim: true,
         required: true
@@ -14,6 +18,26 @@ const banks = new Schema({
         trim: true,
         required: true,
     },
+    long_code: {
+        type: String,
+        trim: true,
+
+    },
+    country: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    currency: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    status: {
+        type: Boolean,
+        default: false
+    },
+
 
 }, { timestamps: true });
 
